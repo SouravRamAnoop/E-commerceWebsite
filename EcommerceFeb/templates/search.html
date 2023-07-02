@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+<!--              background-image:url("/static/images/search.jpg");-->
+<!--              background-size:cover;-->
+         }
+
+        .text-secondary{
+            font-family:sanserif;
+            font-size:80px;
+            color:#000;
+            text-align:center;
+        }
+
+        .search{
+            display:block;
+            align-items:center;
+<!--            background-image:url("/static/images/book1.jpg");-->
+<!--            background-size:cover;-->
+            justify-content:center;
+             padding: 40px 40px;
+
+        }
+        h3{
+            font-family:sanserif;
+            font-size:40px;
+            color:red;
+            text-align:center;
+        }
+        a{
+            color:red;
+        }
+
+        p{
+            font-family:sanserif;
+            font-size:50px;
+            text-align:center;
+         }
+
+    </style>
+</head>
+<body>
+        <h3 class="text-secondary">Search Results</h3><hr>
+        {% for every in object_list %}
+        <div class="search">
+          <h3><a href="{% url 'details' every.pk %}">{{every.title}}</a> </h3>
+          <P>Author:{{every.author}}</P>
+        </div>
+        {% empty %}
+        <h1 class="text-danger">Nothing found:</h1>
+        {% endfor %}
+</body>
+</html>
+

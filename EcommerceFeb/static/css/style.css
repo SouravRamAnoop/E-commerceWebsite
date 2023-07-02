@@ -1,0 +1,17 @@
+
+body {
+  background-color: lightgray;
+  }
+
+h1{
+    text-align:center;
+    color:white;
+ }
+
+.details{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:50px;
+
+}

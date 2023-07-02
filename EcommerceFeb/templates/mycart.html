@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container-fluid {
+            display: flex-start;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .list-group {
+            margin-top: 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+        .row {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            border :1px solid black;
+        }
+        .col-img {
+            flex-basis: 20%;
+            max-width: 20%;
+            text-align: center;
+        }
+        .col-info {
+            flex-basis: 70%;
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 30px;
+
+        }
+        .card-img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            object-fit: cover;
+        }
+        .remove {
+            background-color: red;
+            border-radius:10px;
+        }
+        .btn-remove {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+            padding:8px;
+        }
+        .total-price {
+            font-weight: bold;
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .buy {
+            background-color: #2ecc71;
+            width: 120px;
+            margin-top: 20px;
+            border-radius:10px;
+        }
+        .btn-buy {
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            width: 120px;
+
+        }
+        .empty-cart {
+            text-align: center;
+        }
+        .continue-shopping {
+            margin-top: 40px;
+            font-size:30px;
+        }
+        .back-home {
+            margin-top: 10px;
+            background: blue;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid" >
+    {% if cart_items %}
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/5012/5012784.png" class="cart-icon">My Cart</h2>
+    <ul class="list-group">
+        {% for cart_item in cart_items %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-img">
+                    <img src="{{ cart_item.book.image_url }}" class="card-img" alt="{{ cart_item.book.title }}">
+                </div>
+                <div class="col-info">
+                    <h5>{{ cart_item.book.title }}</h5>
+                    <p>Price: {{ cart_item.book.price }} per Book</p>
+                    <p>Quantity: {{ cart_item.quantity }}</p>
+                    <p>Total price: {{ cart_item.total_price }}</p>
+                    <div>
+                        <button class="remove"><a class="btn btn-outline-danger btn-remove" href="{% url 'remove_from_cart' book_id=cart_item.book.id %}" onclick="alert('Item removed from cart')">Remove from cart</a></button>
+                        <button class="buy"><a class="btn btn-outline-primary btn-buy" href="" onclick="alert('Payment successful')">Buy</a></button>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+<!--        <li class="list-group-item total-price">Total: {{ cart_items.0.cart.total_price }}</li>-->
+    </ul>
+<!--    <button class="buy"><a class="btn btn-outline-primary btn-buy" href="" onclick="alert('Payment successful')">Buy Total</a></button>-->
+    <button class="back-home"><a class="btn btn-outline-danger btn-remove" href="{% url 'home'%}">Back to home</a></button>
+
+    {% else %}
+
+    <div class="empty-cart">
+        <p>Your cart is empty</p>
+        <a href="{% url 'books' %}" class="continue-shopping" style="color: red;">Continue shopping</a>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

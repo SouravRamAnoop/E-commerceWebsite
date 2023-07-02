@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size:30px;
+
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .nav-link:hover{
+            background:blue;
+        }
+
+        /* Header section */
+        .header {
+            background-color: #f8f9fa;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Custom modifications */
+        .navbar.navbar-expand-lg {
+            justify-content: space-between;
+        }
+
+        .navbar .search-form {
+            margin-right: 10px;
+        }
+
+        .navbar .cart-symbol {
+            font-size: 20px;
+            color: red;
+            font-size:36px;
+
+        }
+        .form-control{
+            width:250px;
+        }
+
+        .btn-outline-light{
+            margin:15px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .dropdown-item{
+            color:white
+        }
+
+        .dropbtn {
+              background-color: #808080;
+              color: white;
+              padding: 10px;
+              font-size: 16px;
+              border:none;
+              border-radius: 10px;
+        }
+
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-content {
+              display: none;
+              position: absolute;
+              background-color: #f1f1f1;
+              min-width: 160px;
+              box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+              z-index: 1;
+        }
+
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+    </style>
+</head>
+<body style="background-image: url('static/images/bookstore.jpg'); background-repeat: repeat; background-size: 100%;">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+        <a class="navbar-brand" href="#">Book <span class="spans" style="color:red;">Nook</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about'%}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'books' %}">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                </li>
+
+                </ul>
+                <div class="dropdown">
+                  <button class="dropbtn">{{user}}</button>
+                    <div class="dropdown-content">
+                    {% if user.is_authenticated %}
+                     <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                    {% endif %}
+                    </div>
+                </div>
+
+
+               </ul>
+
+    </div>
+
+        </div>
+        <form class="form-inline search-form" action="{% url 'search' %}" method="get">
+            <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search Your Books" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a class="btn btn-outline-light" href="{% url 'mycart' %}"><i class="cart-symbol fa fa-shopping-cart" style="font-size:20px;padding:10px;">Cart</i></a>
+        </div>
+</nav>
+
+<!-- Header section -->
+<div class="header">
+    <h1>Book <span class="spans" style="color:red;">Nook</span></h1>
+    <p>Discover a wide range of books for all interests and ages.</p>
+</div>
+
+{% block content %}
+
+
+{% endblock %}
+
+</body>
+</html>
